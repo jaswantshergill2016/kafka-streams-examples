@@ -58,9 +58,25 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.version>${kafka.scala.version}.7</scala.version>
         <scalatest.version>3.0.5</scalatest.version>
+<!--        <confluent.version>5.3.1</confluent.version>-->
+<!--        in the common-parent-5.3.1.pom-->
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+
+
         <dependency>
             <groupId>io.confluent</groupId>
             <artifactId>kafka-streams-avro-serde</artifactId>
@@ -76,6 +92,18 @@
             <artifactId>kafka-schema-registry-client</artifactId>
             <version>${confluent.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.confluent/common-utils -->
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>common-utils</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+
+
+
+
+
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
@@ -91,12 +119,16 @@
             <artifactId>kafka-streams-scala_${kafka.scala.version}</artifactId>
             <version>${kafka.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-streams-test-utils</artifactId>
-            <version>${kafka.version}</version>
-            <scope>test</scope>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.kafka</groupId>-->
+        <!--            <artifactId>kafka-streams-test-utils</artifactId>-->
+        <!--            <version>${kafka.version}</version>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
+
+
+
+
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
@@ -182,6 +214,11 @@
             <artifactId>chill_${kafka.scala.version}</artifactId>
             <version>${chill.version}</version>
         </dependency>
+
+
+
+
+
 
         <!-- Test dependencies -->
         <dependency>
@@ -506,7 +543,7 @@
     <profiles>
         <profile>
             <id>docker</id>
-            <activation>
+             <activation>
                 <property>
                     <name>env.BUILD_NUMBER</name>
                 </property>
@@ -516,7 +553,8 @@
                     <plugin>
                         <groupId>com.spotify</groupId>
                         <artifactId>dockerfile-maven-plugin</artifactId>
-                        <version>${dockerfile-maven-plugin.version}</version>
+<!--                        <version>${dockerfile-maven-plugin.version}</version>-->
+                        <version>1.4.13</version>
                         <executions>
                             <execution>
                                 <id>package</id>
